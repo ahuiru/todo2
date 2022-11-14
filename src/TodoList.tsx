@@ -1,19 +1,13 @@
-import { TodoItem } from './TodoItem'
-import './TodoList.css'
-import { TodoListProps } from './types'
+import { TodoItem } from "./TodoItem";
+import "./TodoList.css";
+import { TodoListProps } from "./types";
 
-
-
-export const TodoList = ({ todoList, handleComplete, handleDelete }: TodoListProps) => {
-
+export const TodoList = ({ todoList, setTodoList }: TodoListProps) => {
   return (
-    <div>
-      <div className="todos">
-        {todoList.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} handleComplete={handleComplete} handleDelete={handleDelete}/>
-
-        ))}
-      </div>
-    </div>
-  )
-}
+    <>
+      {todoList.map((todo) => (
+        <TodoItem todo={todo} todoList={todoList} setTodoList={setTodoList} />
+      ))}
+    </>
+  );
+};
