@@ -23,7 +23,7 @@ export type TodoListProps = {
 };
 
 export type TodoItemProps = {
-  todo: todo;
+  todo: { text: string; id: string; completed: boolean };
   todoList: todo[];
   setTodoList: React.Dispatch<React.SetStateAction<todo[]>>;
 };

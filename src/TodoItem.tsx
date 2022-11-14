@@ -1,31 +1,35 @@
 import React from "react";
-import { TodoItemProps } from "./types";
+// import React, { useContext } from "react";
+// import { TodoListContext } from "./App";
+// import { todo } from "./types";
 
-export const TodoItem = ({ todo, todoList, setTodoList }: TodoItemProps) => {
-  const handleComplete = (id: string) => {
-    setTodoList(
-      todoList.map((todo) => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            completed: !todo.completed,
-          };
-        }
-        return todo;
-      })
-    );
-  };
-  // console.log(todoList);
+// export const TodoItem = (todo :todo) => {
+//   const T = useContext(TodoListContext)
 
-  const handleDelete = (id: string) => {
-    setTodoList(todoList.filter((todo) => todo.id !== id));
-  };
+//   const handleComplete = (id: string) => {
+//     T.setTodoList(
+//       T.todoList.map((todo) => {
+//         if (todo.id === id) {
+//           return {
+//             ...todo,
+//             completed: !todo.completed,
+//           };
+//         }
+//         return todo;
+//       })
+//     );
+//   };
+//   // console.log(todoList);
 
-  return (
-    <div className={`todo ${todo.completed ? "complete" : ""}`} key={todo.id}>
-      <span>{todo.text}</span>
-      <button onClick={() => handleComplete(todo.id)}>完了</button>
-      <button onClick={() => handleDelete(todo.id)}>削除</button>
-    </div>
-  );
-};
+//   const handleDelete = (id: string) => {
+//     T.setTodoList(T.todoList.filter((todo) => todo.id !== id));
+//   };
+
+//   return (
+//     <div className={`todo ${todo.completed ? "complete" : ""}`} key={todo.id}>
+//       <span>{todo.text}</span>
+//       <button onClick={() => handleComplete(todo.id)}>完了</button>
+//       <button onClick={() => handleDelete(todo.id)}>削除</button>
+//     </div>
+//   );
+// };

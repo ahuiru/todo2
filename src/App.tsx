@@ -1,9 +1,19 @@
-import { ChangeEvent, createContext, FormEvent, useState } from "react";
+import { createContext, useState } from "react";
 import "./App.css";
 import { TodoForm } from "./TodoForm";
 import { TodoList } from "./TodoList";
 
-import { todo, todoContext } from "./types";
+import { todo } from "./types";
+
+export const InputContext = createContext({} as {
+  inputText: string,
+  setInputText: React.Dispatch<React.SetStateAction<string>>
+});
+
+export const TodoListContext = createContext({} as {
+  todoList: todo[],
+  setTodoList: React.Dispatch<React.SetStateAction<todo[]>>
+});
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -12,12 +22,12 @@ function App() {
   return (
     <div className="App">
       <h1>TODO!</h1>
-      {/* <HandleContext.Provider
-        value={[inputText, handleSubmit, handleChange, todoList, handleComplete, handleDelete]}
-      > */}
-      <TodoForm inputText={inputText} setInputText={setInputText} todoList={todoList} setTodoList={setTodoList} />
-      <TodoList todoList={todoList} setTodoList={setTodoList} />
-      {/* </HandleContext.Provider> */}
+      <InputContext.Provider value={{inputText, setInputText}}>
+        <TodoListContext.Provider value={{todoList, setTodoList}}>
+          <TodoForm />
+          <TodoList />
+        </TodoListContext.Provider>
+      </InputContext.Provider>
     </div>
   );
 }

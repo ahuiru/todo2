@@ -1,35 +1,41 @@
-import React, { ChangeEvent, FormEvent } from 'react';
-// import { HandleContext } from './App';
-import { TodoFormProps } from './types';
+import React, { ChangeEvent, FormEvent, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { InputContext, TodoListContext } from "./App";
 
-export const TodoForm = ({ inputText, setInputText, todoList, setTodoList }: TodoFormProps) => {
+export const TodoForm = () => {
+  const I = useContext(InputContext);
+  const T = useContext(TodoListContext);
 
-  // const value = useContext(HandleContext)
   const handleChange = (e: ChangeEvent) => {
     const { value } = e.target as HTMLInputElement;
     // console.log(e.target as HTMLInputElement)
-    setInputText(value);
+    I.setInputText(value);
     // console.log(value);
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setTodoList([
-      ...todoList,
+    T.setTodoList([
+      ...T.todoList,
       {
-        text: inputText,
+        text: I.inputText,
         id: uuidv4(),
         completed: false,
       },
     ]);
-    setInputText("");
+    I.setInputText("");
   };
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
-      <input type="text" placeholder='内容を入力' onChange={(e) => handleChange(e)} value={inputText} required/>
+      <input
+        type="text"
+        placeholder="内容を入力"
+        onChange={(e) => handleChange(e)}
+        value={I.inputText}
+        required
+      />
       <button>送信</button>
     </form>
-  )
-}
+  );
+};
